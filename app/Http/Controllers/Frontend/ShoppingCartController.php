@@ -21,8 +21,8 @@ class ShoppingCartController extends Controller
     {
         $product = Product::find($id);
         Cart::add(['id' => $id, 'name' => $product->p_name, 'qty' => 1, 'price' => $product->p_price, 'weight' => 1, 'options' => ['image' => $product->p_image]]);
-        //return redirect()->back();
-        return response(['messages' => 'Thêm vào giỏ hàng thành công']);
+        return redirect()->back();
+       // return response(['messages' => 'Thêm vào giỏ hàng thành công']);
     }
 
     public function update(Request $request)

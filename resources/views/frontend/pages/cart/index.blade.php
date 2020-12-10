@@ -1,4 +1,7 @@
 @extends('layouts.app_master_page')
+@section('slider')
+    @include('layouts.components.slider')
+@endsection
 @section('content')
     @if(\Cart::count()>0)
         <div class="cart_update">

@@ -1,4 +1,7 @@
 @extends('layouts.app_master_page')
+@section('slider')
+    @include('layouts.components.slider')
+@endsection
 @section('content')
     @include('frontend.components.left_sidebar')
     <div class="col-sm-9 padding-right">
@@ -14,7 +17,7 @@
                                 <h2>${{$product->p_price}}</h2>
                                 <p>{{$product->p_name}}</p>
                             </a>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
+                            <a href="{{route('frontend.shopping.add',$product->id )}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
                                 cart</a>
                         </div>
 
@@ -352,7 +355,7 @@
                                         <img src="source/frontend/Eshopper/images/home/recommend1.jpg" alt="">
                                         <h2>$56</h2>
                                         <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
+                                        <a href="" class="btn btn-default add-to-cart"><i
                                                 class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
 

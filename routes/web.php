@@ -67,6 +67,8 @@ Route::group(['prefix' => 'pages'], function () {
     Route::group(['prefix' => 'home'], function () {
         Route::get('', 'Frontend\HomeController@index')->name('pages.home.index');
         Route::get('product-detail/{slug}', 'Frontend\HomeController@detail')->name('pages.home.detail');
+        Route::post('ajax_load_comment', 'Frontend\HomeController@ajax_load_comment')->name('pages.detail.load_comment');
+        Route::post('ajax_add_comment', 'Frontend\HomeController@ajax_add_comment')->name('pages.detail.add_comment');
         Route::post('auto-complete', 'Frontend\HomeController@autoComplete')->name('page.home.autoComplete');
         Route::post('search', 'Frontend\HomeController@search')->name('page.home.search');
     });
@@ -79,5 +81,23 @@ Route::group(['prefix' => 'pages'], function () {
         Route::post('ajax_coupon', 'Admin\ProductController@ajax_coupon')->name('admin.ajax_coupon');
         Route::post('delete_ajax_coupon', 'Admin\ProductController@delete_ajax_coupon')->name('admin.delete.ajax_coupon');
         Route::post('ajax_location', 'Frontend\ShoppingCartController@ajax_location')->name('ajax_get.location');
+
+    });
+    Route::group(['prefix' => 'login'], function () {
+        Route::get('', 'Frontend\AccountController@index')->name('frontend.login.index');
+        Route::post('register', 'Frontend\AccountController@register')->name('frontend.register');
     });
 });
+
+
+Auth::routes();
+Route::get('/auth/redirect/{provider}', 'GoogleLoginController@redirect');
+Route::get('/callback/{provider}', 'GoogleLoginController@callback');
+
+Route::get('/facebook/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/facebook/callback/{provider}', 'SocialController@callback');
+
+Route::get('login','Auth\AccountController@login')->name('account.login');
+Route::post('login','Auth\AccountController@post_login');
+Route::get('logout', 'Auth\AccountController@logout')->name('account.logout');
+Route::get('/home', 'HomeController@index')->name('home');
