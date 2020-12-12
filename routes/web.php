@@ -63,11 +63,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('delete/{id}', 'Admin\CouponController@delete')->name('admin.coupon.delete');
     });
 });
+
 Route::group(['prefix' => 'pages'], function () {
     Route::group(['prefix' => 'home'], function () {
         Route::get('', 'Frontend\HomeController@index')->name('pages.home.index');
         Route::get('product-detail/{slug}', 'Frontend\HomeController@detail')->name('pages.home.detail');
         Route::post('ajax_load_comment', 'Frontend\HomeController@ajax_load_comment')->name('pages.detail.load_comment');
+        Route::post('ajax_rating','Frontend\HomeController@ajaxRating')->name('user.ajax_rating');
+        Route::get('list_rating/{slug}','Frontend\HomeController@list_rating')->name('user.list_rating');
+        Route::get('filter_rating/{slug}/{number}','Frontend\HomeController@filter_rating')->name('user.filter_rating');
         Route::post('ajax_add_comment', 'Frontend\HomeController@ajax_add_comment')->name('pages.detail.add_comment');
         Route::post('auto-complete', 'Frontend\HomeController@autoComplete')->name('page.home.autoComplete');
         Route::post('search', 'Frontend\HomeController@search')->name('page.home.search');

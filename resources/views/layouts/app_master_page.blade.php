@@ -28,9 +28,47 @@
           href="source/frontend/Eshopper/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed"
           href="source/frontend/Eshopper/images/ico/apple-touch-icon-57-precomposed.png">
+    <style>
+        /* Paste this css to your style sheet file or under head tag */
+        /* This only works with JavaScript,
+        if it's not present, don't show loader */
+        .no-js #loader {
+            display: none;
+        }
+
+        .js #loader {
+            display: block;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
+
+        .se-pre-con {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url("source/images/loader-64x/Preloader_2.gif") center no-repeat #fff;
+        }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script>
+        //paste this code under head tag or in a seperate js file.
+        // Wait for window load
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut('fast');
+        });
+    </script>
 </head><!--/head-->
 
 <body>
+<!-- Paste this code after body tag -->
+<div class="se-pre-con"></div>
+<!-- Ends -->
 <header id="header"><!--header-->
     <div class="header_top"><!--header_top-->
         <div class="container">
@@ -101,11 +139,12 @@
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="{{route('frontend.shopping.index')}}"><i class="fa fa-shopping-cart"></i> Cart</a>
                             </li>
-                                @if(Auth::check())
-                                    <li><a href="{{route('account.logout')}}"><i class="fa fa-lock"></i> Logout</a></li>
-                                @else
-                                    <li><a href="{{route('frontend.login.index')}}"><i class="fa fa-lock"></i> Login</a></li>
-                                @endif
+                            @if(Auth::check())
+                                <li><a href="{{route('account.logout')}}"><i class="fa fa-lock"></i> Logout</a></li>
+                            @else
+                                <li><a href="{{route('frontend.login.index')}}"><i class="fa fa-lock"></i> Login</a>
+                                </li>
+                            @endif
 
                         </ul>
                     </div>
@@ -333,7 +372,7 @@
     </div>
 
 </footer><!--/Footer-->
-
+<script src="source/admin/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 @yield('script')
 <script src="source/frontend/Eshopper/js/jquery.js"></script>
 <script src="source/frontend/Eshopper/js/bootstrap.min.js"></script>
