@@ -12,6 +12,7 @@
     @endif
 @section('script')
     <script src="source/admin/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
         function update(rowId, qty) {
             // let $this = $(this);
@@ -116,6 +117,46 @@
             })
         }
 
+
+    </script>
+    <script>
+        paypal.Button.render({
+            // Configure environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'AcUbEKGCikDOFX0Lc7iuolNMzxXGkyE-hhg9yXVz9-ZGxFV-17YkfBCXbX4gcpn7gznROLTTySenX7bX',
+                production: 'demo_production_client_id'
+            },
+            // Customize button (optional)
+            locale: 'en_US',
+            style: {
+                size: 'small',
+                color: 'gold',
+                shape: 'pill',
+            },
+
+            // Enable Pay Now checkout flow (optional)
+            commit: true,
+
+            // Set up a payment
+            payment: function(data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: '0.01',
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+            // Execute the payment
+            onAuthorize: function(data, actions) {
+                return actions.payment.execute().then(function() {
+                    // Show a confirmation message to the buyer
+                    window.alert('Thank you for your purchase!');
+                });
+            }
+        }, '#paypal-button');
 
     </script>
 @endsection

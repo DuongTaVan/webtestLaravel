@@ -140,6 +140,7 @@
                     <a class="btn btn-default update" href="">Update</a>
                     <a class="btn btn-default check_out" href="">Check Out</a>
                 </div>
+                <div id="paypal-button"></div>
             </div>
         </div>
     </div>
